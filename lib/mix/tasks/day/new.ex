@@ -22,8 +22,15 @@ defmodule Mix.Tasks.Day.New do
   defp render_solution_file(day) do
     """
     defmodule Aoc2022.Day#{day} do
+      defmodule State do
+        defstruct []
+
+        def new, do: %__MODULE__{}
+      end
+
       defmodule Part1 do
         def solve(input) do
+          raise "Not implemented yet"
         end
       end
     end
@@ -37,10 +44,11 @@ defmodule Mix.Tasks.Day.New do
 
       alias Aoc2022.Day#{day}.Part1
 
-      @test_input1 ""
+      @test_input1 \"\"\"
+      \"\"\"
 
-      describe "Day #{day} - Part 1" do
-        test "foo" do
+      describe "Day#{day}" do
+        test "Part1" do
           assert 42 == @test_input1 |> Part1.solve()
         end
       end
