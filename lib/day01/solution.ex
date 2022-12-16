@@ -21,12 +21,7 @@ defmodule Aoc2022.Day01 do
 
     def acc("", {:ok, %__MODULE__{} = self}), do: {:ok, self |> end_loop()}
     def acc(str, {:ok, %__MODULE__{} = self}) when is_binary(str) do
-      parse_result =
-        str
-        |> String.trim()
-        |> Integer.parse()
-
-      case parse_result do
+      case str |> Integer.parse() do
         :error -> {:error, :parse_failed, str}
         {num, _} -> {:ok, self |> add(num)}
       end
@@ -37,7 +32,7 @@ defmodule Aoc2022.Day01 do
   defmodule Part1 do
     def solve(input) do
       {:ok, result} = input
-      |> String.split("\n")
+      |> Aoc2022.read_lines()
       |> Enum.reduce({:ok, State.new}, &State.acc(&1, &2))
 
       final_result = result |> State.end_loop()
@@ -48,7 +43,7 @@ defmodule Aoc2022.Day01 do
   defmodule Part2 do
     def solve(input) do
       {:ok, result} = input
-      |> String.split("\n")
+      |> Aoc2022.read_lines()
       |> Enum.reduce({:ok, State.new}, &State.acc(&1, &2))
 
       final_result = result |> State.end_loop()

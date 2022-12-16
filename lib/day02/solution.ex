@@ -54,8 +54,7 @@ defmodule Aoc2022.Day02 do
 
   def read_lines(input) do
     input
-    |> String.split("\n")
-    |> Enum.map(&String.trim(&1))
+    |> Aoc2022.read_lines()
     |> Enum.filter(&is_non_blank?(&1))
     |> Enum.map(fn line ->
       [left, right] =
