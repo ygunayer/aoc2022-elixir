@@ -24,6 +24,8 @@ $ mix day.solve 1
 $ mix day.solve 3 4
 ```
 
+Note that solver task first looks for a file at `lib/day{padded_day}/input{part}.txt` for the problem input, and if it can't find it, it uses `lib/day{padded_day}/input.txt` instead.
+
 ## Development
 You can generate a set of solution and test files for any given day by running the `day.new` task.
 

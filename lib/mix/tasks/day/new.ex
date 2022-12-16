@@ -7,7 +7,7 @@ defmodule Mix.Tasks.Day.New do
 
     root_lib_dir |> mkdir()
     Path.join([root_lib_dir, "solution.ex"]) |> File.write!(render_solution_file(padded_day))
-    Path.join([root_lib_dir, "input1.txt"]) |> File.write!("")
+    Path.join([root_lib_dir, "input.txt"]) |> File.write!("")
 
     root_test_dir |> mkdir()
     Path.join([root_test_dir, "solution_test.exs"]) |> File.write!(render_test_file(padded_day))

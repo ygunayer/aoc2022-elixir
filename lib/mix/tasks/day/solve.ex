@@ -9,12 +9,7 @@ defmodule Mix.Tasks.Day.Solve do
 
     padded_day = day |> to_string() |> String.pad_leading(2, "0")
 
-    input = Path.join([
-      "lib",
-      "day" <> padded_day,
-      "input" <> part <> ".txt"
-    ])
-    |> File.read!()
+    input = read_input!(padded_day, part)
 
     result = Module.concat([
       Aoc2022,
@@ -24,5 +19,17 @@ defmodule Mix.Tasks.Day.Solve do
     |> apply(:solve, [input])
 
     IO.puts result
+  end
+
+  def read_input!(day, part) do
+    day_dir = Path.join("lib", "day" <> day)
+
+    part_file = Path.join(day_dir, "input" <> part <> ".txt")
+    common_file = Path.join(day_dir, "input.txt")
+
+    [part_file, common_file]
+    |> Enum.filter(&File.exists?/1)
+    |> Enum.at(0)
+    |> File.read!()
   end
 end
