@@ -1,6 +1,7 @@
 defmodule Mix.Tasks.Day.New do
   def run(args) do
     {padded_day, lib_dir, test_dir} = parse_args(args)
+    {raw_day, _} = Integer.parse(padded_day)
 
     lib_dir |> mkdir()
     Path.join([lib_dir, "solution.ex"]) |> File.write!(render_solution_file(padded_day))
@@ -8,6 +9,10 @@ defmodule Mix.Tasks.Day.New do
 
     test_dir |> mkdir()
     Path.join([test_dir, "solution_test.exs"]) |> File.write!(render_test_file(padded_day))
+
+    IO.puts "Generated files for day #{padded_day}"
+    IO.puts "Instructions: https://adventofcode.com/2022/day/#{raw_day}"
+    IO.puts "Input: https://adventofcode.com/2022/day/#{raw_day}/input"
   end
 
   def parse_args([]) do
