@@ -46,12 +46,6 @@ defmodule Mix.Tasks.Day.New do
   defp render_solution_file(day) do
     """
     defmodule Aoc2022.Day#{day} do
-      defmodule State do
-        defstruct []
-
-        def new, do: %__MODULE__{}
-      end
-
       defmodule Part1 do
         def solve(input) do
           raise "Not implemented yet"
@@ -66,6 +60,7 @@ defmodule Mix.Tasks.Day.New do
     defmodule Aoc2022.Day#{day}Test do
       use ExUnit.Case
 
+      alias Aoc2022.Day#{day}
       alias Aoc2022.Day#{day}.Part1
 
       @test_input1 \"\"\"
