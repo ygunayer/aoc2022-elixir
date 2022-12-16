@@ -29,9 +29,12 @@ Note that solver task first looks for a file at `lib/day{padded_day}/input{part}
 ## Development
 You can generate a set of solution and test files for any given day by running the `day.new` task.
 
-This creates a 1-part solution for the given day, so it's up to the developer to add more parts
+This creates a 1-part solution for the given day, so it's up to the developer to add more parts.
 
 ```bash
+# creates files for the first unimplemented day
+$ mix day.new
+
 # creates files for day 42
 $ mix day.new 42
 ```
