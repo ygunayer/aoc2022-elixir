@@ -19,21 +19,17 @@ defmodule Aoc2022.Day01 do
       }
     end
 
-    def acc("", {:ok, %__MODULE__{} = self}), do: {:ok, self |> end_loop()}
-    def acc(str, {:ok, %__MODULE__{} = self}) when is_binary(str) do
-      case str |> Integer.parse() do
-        :error -> {:error, :parse_failed, str}
-        {num, _} -> {:ok, self |> add(num)}
-      end
-    end
-    def acc(_, other), do: other
+    def acc!("", %__MODULE__{} = self), do: self |> end_loop()
+    def acc!(str, %__MODULE__{} = self) when is_binary(str), do: self |> add(Aoc2022.parse_int!(str))
+    def acc!(_, other), do: other
   end
 
   defmodule Part1 do
     def solve(input) do
-      {:ok, result} = input
-      |> Aoc2022.read_lines()
-      |> Enum.reduce({:ok, State.new}, &State.acc(&1, &2))
+      result =
+        input
+        |> Aoc2022.read_lines()
+        |> Enum.reduce(State.new, &State.acc!(&1, &2))
 
       final_result = result |> State.end_loop()
       final_result.max_totals |> Enum.at(0)
@@ -42,9 +38,10 @@ defmodule Aoc2022.Day01 do
 
   defmodule Part2 do
     def solve(input) do
-      {:ok, result} = input
-      |> Aoc2022.read_lines()
-      |> Enum.reduce({:ok, State.new}, &State.acc(&1, &2))
+      result =
+        input
+        |> Aoc2022.read_lines()
+        |> Enum.reduce(State.new, &State.acc!(&1, &2))
 
       final_result = result |> State.end_loop()
       final_result.max_totals |> Enum.sum()

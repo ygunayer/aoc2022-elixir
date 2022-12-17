@@ -26,3 +26,5 @@ aoc2022-*.tar
 /tmp/
 
 .elixir_ls
+
+.vscode/

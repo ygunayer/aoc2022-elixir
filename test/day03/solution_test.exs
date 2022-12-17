@@ -5,14 +5,7 @@ defmodule Aoc2022.Day03Test do
   alias Aoc2022.Day03.Part1
   alias Aoc2022.Day03.Part2
 
-  @test_input1 """
-  vJrwpWtwJgWrhcsFMMfFFhFp
-  jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
-  PmmdzqPrVvPwwTWBwg
-  wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
-  ttgJtRGJQctTZtZT
-  CrZsJsPPZsGzwwsLwLmpwMDw
-  """
+  @test_input File.read!("test/day03/input.txt")
 
   describe "Day03" do
     test "intersect/1" do
@@ -29,11 +22,11 @@ defmodule Aoc2022.Day03Test do
     end
 
     test "Part1" do
-      assert 157 == @test_input1 |> Part1.solve()
+      assert 157 == @test_input |> Part1.solve()
     end
 
     test "Part2" do
-      assert 70 == @test_input1 |> Part2.solve()
+      assert 70 == @test_input |> Part2.solve()
     end
   end
 end

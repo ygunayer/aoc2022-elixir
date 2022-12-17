@@ -33,15 +33,11 @@ defmodule Aoc2022.Day04 do
 
   def parse_line!(line) do
     case Regex.run(~r/^(\d+)\-(\d+),(\d+)\-(\d+)$/, line) do
-      [_, a, b, c, d] -> [a, b, c, d] |> Enum.map(&parse_int!/1)
-      _ -> raise "Failed to parse line #{line}"
-    end
-  end
+      [_, a, b, c, d] ->
+        [a, b, c, d]
+        |> Enum.map(&Aoc2022.parse_int!/1)
 
-  def parse_int!(str) do
-    case Integer.parse(str) do
-      :error -> raise "Invalid number #{str}"
-      {num, _} -> num
+      _ -> raise "Failed to parse line #{line}"
     end
   end
 end

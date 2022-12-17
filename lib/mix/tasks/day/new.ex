@@ -9,6 +9,7 @@ defmodule Mix.Tasks.Day.New do
 
     test_dir |> mkdir()
     Path.join([test_dir, "solution_test.exs"]) |> File.write!(render_test_file(padded_day))
+    Path.join([test_dir, "input.txt"]) |> File.write!("")
 
     IO.puts "Generated files for day #{padded_day}"
     IO.puts "Instructions: https://adventofcode.com/2022/day/#{raw_day}"
@@ -51,6 +52,12 @@ defmodule Mix.Tasks.Day.New do
           raise "Not implemented yet"
         end
       end
+
+      defmodule Part2 do
+        def solve(input) do
+          raise "Not implemented yet"
+        end
+      end
     end
     """
   end
@@ -62,13 +69,17 @@ defmodule Mix.Tasks.Day.New do
 
       alias Aoc2022.Day#{day}
       alias Aoc2022.Day#{day}.Part1
+      alias Aoc2022.Day#{day}.Part2
 
-      @test_input1 \"\"\"
-      \"\"\"
+      @test_input File.read!("test/day#{day}/input.txt")
 
       describe "Day#{day}" do
         test "Part1" do
-          assert 42 == @test_input1 |> Part1.solve()
+          assert 42 == @test_input |> Part1.solve()
+        end
+
+        test "Part2" do
+          assert 1 == 1
         end
       end
     end

@@ -5,14 +5,7 @@ defmodule Aoc2022.Day04Test do
   alias Aoc2022.Day04.Part1
   alias Aoc2022.Day04.Part2
 
-  @test_input1 """
-  2-4,6-8
-  2-3,4-5
-  5-7,7-9
-  2-8,3-7
-  6-6,4-6
-  2-6,4-8
-  """
+  @test_input File.read!("test/day04/input.txt")
 
   describe "Day04.fully_contains?" do
     cases = [
@@ -38,11 +31,11 @@ defmodule Aoc2022.Day04Test do
 
   describe "Day04" do
     test "Part1" do
-      assert 2 == @test_input1 |> Part1.solve()
+      assert 2 == @test_input |> Part1.solve()
     end
 
     test "Part2" do
-      assert 4 == @test_input1 |> Part2.solve()
+      assert 4 == @test_input |> Part2.solve()
     end
   end
 end
