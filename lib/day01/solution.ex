@@ -20,7 +20,7 @@ defmodule Aoc2022.Day01 do
     end
 
     def acc!("", %__MODULE__{} = self), do: self |> end_loop()
-    def acc!(str, %__MODULE__{} = self) when is_binary(str), do: self |> add(Aoc2022.parse_int!(str))
+    def acc!(str, %__MODULE__{} = self) when is_binary(str), do: self |> add(str |> String.to_integer())
     def acc!(_, other), do: other
   end
 

@@ -97,7 +97,7 @@ defmodule Aoc2022.Day05 do
 
   def parse_num_crates(line) do
     [_, snum] = Regex.run(~r/(\d+)\s*$/, line)
-    snum |> Aoc2022.parse_int!()
+    snum |> String.to_integer()
   end
 
   def parse_layout_line(line, num_crates) do
@@ -118,7 +118,7 @@ defmodule Aoc2022.Day05 do
   def parse_movement(line) do
     [_, snum, sfrom, sto] = Regex.run(~r/(\d+).*(\d+).*(\d+)/, line)
     [snum, sfrom, sto]
-    |> Enum.map(&Aoc2022.parse_int!/1)
+    |> Enum.map(&String.to_integer/1)
     |> List.to_tuple()
   end
 end

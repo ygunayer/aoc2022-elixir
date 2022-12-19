@@ -1,7 +1,6 @@
 defmodule Aoc2022.Day06Test do
   use ExUnit.Case
 
-  alias Aoc2022.Day06
   alias Aoc2022.Day06.Part1
   alias Aoc2022.Day06.Part2
 

@@ -47,6 +47,8 @@ defmodule Mix.Tasks.Day.New do
   defp render_solution_file(day) do
     """
     defmodule Aoc2022.Day#{day} do
+      alias Aoc2022.Day#{day}
+
       defmodule Part1 do
         def solve(input) do
           raise "Not implemented yet"
