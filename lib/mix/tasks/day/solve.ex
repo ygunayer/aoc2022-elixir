@@ -1,31 +1,38 @@
 defmodule Mix.Tasks.Day.Solve do
   use Mix.Task
 
+  alias Mix.TaskHelper
+
   def run(args) do
-    [day, part] = case args do
-      [day] -> [day, "1"]
-      [_, _] -> args
-    end
+    {day, parts} = args |> parse_args()
 
-    padded_day = day |> to_string() |> String.pad_leading(2, "0")
+    {padded_day, _, _} = day
 
-    input = read_input!(padded_day, part)
+    parts
+    |> Enum.each(fn part ->
+      input = read_input!(day, part)
 
-    result = Module.concat([
-      Aoc2022,
-      "Day#{padded_day}",
-      "Part#{part}"
-    ])
-    |> apply(:solve, [input])
+      result = Module.concat([
+        Aoc2022,
+        "Day#{padded_day}",
+        "Part#{part}"
+      ])
+      |> apply(:solve, [input])
 
-    IO.puts result
+      IO.puts "Day: #{padded_day}, Part: #{part}"
+      IO.puts "--------"
+      IO.puts result
+      IO.puts ""
+    end)
   end
 
-  def read_input!(day, part) do
-    day_dir = Path.join("lib", "day" <> day)
+  def parse_args([day]), do: {TaskHelper.dirs_for(day), ["1", "2"]}
+  def parse_args([day, part]), do: {TaskHelper.dirs_for(day), [part]}
+  def parse_args([]), do: {TaskHelper.last_implemented_day(), ["1", "2"]}
 
-    part_file = Path.join(day_dir, "input" <> part <> ".txt")
-    common_file = Path.join(day_dir, "input.txt")
+  def read_input!({_, lib_dir, _}, part) do
+    part_file = Path.join(lib_dir, "input" <> part <> ".txt")
+    common_file = Path.join(lib_dir, "input.txt")
 
     [part_file, common_file]
     |> Enum.filter(&File.exists?/1)

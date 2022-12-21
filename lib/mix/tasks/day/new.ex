@@ -1,13 +1,15 @@
 defmodule Mix.Tasks.Day.New do
+  alias Mix.TaskHelper
+
   def run(args) do
     {padded_day, lib_dir, test_dir} = parse_args(args)
     {raw_day, _} = Integer.parse(padded_day)
 
-    lib_dir |> mkdir()
+    lib_dir |> TaskHelper.mkdir()
     Path.join([lib_dir, "solution.ex"]) |> File.write!(render_solution_file(padded_day))
     Path.join([lib_dir, "input.txt"]) |> File.write!("")
 
-    test_dir |> mkdir()
+    test_dir |> TaskHelper.mkdir()
     Path.join([test_dir, "solution_test.exs"]) |> File.write!(render_test_file(padded_day))
     Path.join([test_dir, "input.txt"]) |> File.write!("")
 
@@ -16,33 +18,8 @@ defmodule Mix.Tasks.Day.New do
     IO.puts "Input: https://adventofcode.com/2022/day/#{raw_day}/input"
   end
 
-  def parse_args([]) do
-    1..31
-    |> Enum.map(&leftpad/1)
-    |> Enum.map(&get_dirs/1)
-    |> Enum.drop_while(fn {_, lib_dir, _} ->
-      lib_dir |> File.exists?()
-    end)
-    |> Enum.take(1)
-    |> Enum.at(0)
-  end
-  def parse_args([day]), do: get_dirs(day)
-
-  defp get_dirs(day) do
-    padded_day = day |> leftpad()
-    {padded_day, lib_dir_for(day), test_dir_for(day)}
-  end
-
-  defp lib_dir_for(day), do: Path.join(["lib", "day" <> leftpad(day)])
-  defp test_dir_for(day), do: Path.join(["test", "day" <> leftpad(day)])
-
-  defp leftpad(input, len \\ 2), do: input |> to_string() |> String.pad_leading(len, "0")
-
-  defp mkdir(path) do
-    unless File.exists?(path) do
-      File.mkdir!(path)
-    end
-  end
+  def parse_args([day]), do: TaskHelper.dirs_for(day)
+  def parse_args([]), do: TaskHelper.first_unimplemented_day()
 
   defp render_solution_file(day) do
     """

@@ -17,11 +17,14 @@ $ mix test
 You can also run a specific solution part and day by running the `day.run` mix task
 
 ```bash
-# runs part 1 of day 1
+# runs part 1 and 2 for the last implemented day
+$ mix day.solve
+
+# runs parts 1 and 2 for day 1
 $ mix day.solve 1
 
-# runs part 4 of day 3
-$ mix day.solve 3 4
+# runs part 2 for day 3
+$ mix day.solve 3 2
 ```
 
 Note that solver task first looks for a file at `lib/day{padded_day}/input{part}.txt` for the problem input, and if it can't find it, it uses `lib/day{padded_day}/input.txt` instead.
